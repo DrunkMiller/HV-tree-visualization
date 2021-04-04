@@ -1,9 +1,8 @@
 ## Руализация layered-tree-draw алгоритма
 
 *В replit.com уже есть собранный jar используйте его для быстрой работы*
-
-*Команда запуска jar:* <kotlin -classpath main.jar MainKt "path to graph file"> 
-*пример:* <kotlin -classpath main.jar MainKt "examples/binary-tree-42n">
+  *Команда запуска jar:* <kotlin -classpath main.jar MainKt "path to graph file"> 
+  *пример:* <kotlin -classpath main.jar MainKt "examples/binary-tree-42n">
 
 *В папке examples есть подготовленные примеры графов*
 
