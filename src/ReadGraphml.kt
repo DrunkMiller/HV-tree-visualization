@@ -2,7 +2,7 @@ import org.w3c.dom.Document
 import java.io.File
 import javax.xml.parsers.DocumentBuilderFactory
 
-fun readFromGraphml(path: String): Node {
+fun readGraphml(path: String): Node {
     val doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(File(path))
     val nodes = findNodes(doc)
     val edges = findEdges(doc)
@@ -14,11 +14,7 @@ private fun link(nodes: List<String>, edges: List<Pair<String, String>>): Node {
     edges.forEach { (source, target) ->
         val parent = mappedNodes[source] ?: throw IllegalStateException("GRAPHML: wrong graph structure")
         val child = mappedNodes[target] ?: throw IllegalStateException("GRAPHML: wrong graph structure")
-        when {
-            parent.left == null -> parent.left = child
-            parent.right == null -> parent.right = child
-            else -> throw IllegalStateException("GRAPHML not a binary graph")
-        }
+        parent.children.add(child)
     }
     val root = (nodes - edges.map { it.second })
     if (root.size != 1) throw IllegalStateException("GRAPHML: wrong graph structure")

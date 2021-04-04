@@ -59,7 +59,7 @@
     <node id="n1-2"/>
     <node id="n1-3"/>
     <node id="n1-4"/>
-    <node id="n1-22"/>
+    <node id="n1-5"/>
     <node id="n34-1"/>
     <node id="n34-2"/>
     <node id="n43-1"/>
@@ -98,7 +98,7 @@
     <edge source="n0" target="n1"/>
     <edge source="n0" target="n1-1"/>
     <edge source="n0" target="n1-2"/>
-    <edge source="n1-2" target="n1-22"/>
+    <edge source="n1-2" target="n1-5"/>
     <edge source="n0" target="n1-3"/>
     <edge source="n0" target="n1-4"/>
     <edge source="n0" target="n36"/>
