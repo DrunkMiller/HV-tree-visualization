@@ -1,4 +1,10 @@
 ## Руализация layered-tree-draw алгоритма
+
+*В replit.com уже есть собранный jar используйте его в консоле для быстрой работы*
+*Команда запуска jar:* <kotlin -classpath main.jar MainKt "path to graph file"> (*пример:* <kotlin -classpath main.jar MainKt "examples/binary-tree-42n">)
+
+*В папке examples есть подготовленные примеры графов*
+
 - **ReadGraphml.kt** - Чтение графа из graphml файла
 - **LayeredTreeAlgorithm.kt** - Реализация алгоритма
 - **GraphGraphics.kt** - Инструменты отрисовки графа по заданным координатам
