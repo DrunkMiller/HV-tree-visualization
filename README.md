@@ -8,7 +8,7 @@
 
 - **ReadGraphml.kt** - Чтение графа из graphml файла
 - **LayeredTreeAlgorithm.kt** - Реализация алгоритма
-- **GraphGraphics.kt** - Инструменты отрисовки графа по заданным координатам
+- **GraphGraphics.kt** - Инструменты отрисовки графа
 
 При инициализации GraphGraphics задается:
 - <fillColor> - цвет заливки вершин
