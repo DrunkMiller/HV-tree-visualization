@@ -61,7 +61,7 @@ class LayeredTreeAlgorithm {
 
     private fun squeeze(boundary: List<Pair<Node, Boundary>>): Boundary {
         if (boundary.isEmpty()) return emptyList()
-        val newRightBoundaries = boundary.reduce { (l, leftBoundaries), (rightNode, rightBoundaries) ->
+        val newRightBoundaries = boundary.reduce { (_, leftBoundaries), (rightNode, rightBoundaries) ->
             val distance = distance(leftBoundaries, rightBoundaries) - 1
             if (distance > 0) move(rightNode, distance)
             val newRightBoundaries = if (distance > 0) rightBoundaries.shift(distance) else rightBoundaries

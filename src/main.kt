@@ -1,8 +1,9 @@
 import java.io.File
 import javax.imageio.ImageIO
 
-fun main() {
-    val graphFile = "examples/small-wide-tree-20n"
+fun main(args: Array<String>) {
+    val defaultGraphFile = "examples/small-wide-tree-20n"
+    val graphFile = if(args.isEmpty()) defaultGraphFile else args[0]
     val root = readGraphml("$graphFile.graphml")
     val nodesPositions = LayeredTreeAlgorithm().place(root)
     val image = GraphGraphics(grid = true).drawTree(nodesPositions)

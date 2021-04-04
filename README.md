@@ -1,1 +1,12 @@
-# HV-tree-visualization
+## Руализация layered-tree-draw алгоритма
+- **ReadGraphml.kt** - Чтение графа из graphml файла
+- **LayeredTreeAlgorithm.kt** - Реализация алгоритма
+- **GraphGraphics.kt** - Инструменты отрисовки графа по заданным координатам
+
+При инициализации GraphGraphics задается:
+- <fillColor> - цвет заливки вершин
+- <borderColor> - цвет ребер и границ вершин
+- <xPadding> - размер сетки по оси x
+- <xPadding> - размер сетки по оси y
+- <nodeTitle> - флаг вывода на изображение графа идентификаторов вершин
+- <grid> - флаг вывода сетки на изображение графа
