@@ -1,6 +1,7 @@
 import java.awt.Color
 import java.awt.Graphics2D
 import java.awt.RenderingHints.*
+import java.awt.geom.CubicCurve2D
 import java.awt.geom.Ellipse2D
 import java.awt.geom.Line2D
 import java.awt.image.BufferedImage
@@ -11,6 +12,7 @@ class GraphGraphics(
     val borderColor: Color = Color.black,
     val xPadding: Double = 80.0,
     val yPadding: Double = 100.0,
+    val bezierEdges: Boolean = true,
     val nodeTitle: Boolean = true,
     val grid: Boolean = false
 ) {
@@ -28,7 +30,7 @@ class GraphGraphics(
     fun drawNode(node: Node, pos: Position) {
         val (id, children) = node
         children.forEach { drawEdge(pos, nodes[it]!!) }
-        val nodeShape = nodeShape(pos.x, pos.y)
+        val nodeShape = nodeShape(pos)
         graphics.color = borderColor
         graphics.draw(nodeShape)
         graphics.color = fillColor
@@ -37,7 +39,10 @@ class GraphGraphics(
     }
 
     fun drawEdge(from: Position, to: Position) {
-        val edgeShape = edgeShape(from.x, from.y, to.x, to.y)
+        val edgeShape = if (bezierEdges)
+            bezierEdgeShape(from, to)
+        else
+            straightEdgeShape(from, to)
         graphics.color = borderColor
         graphics.draw(edgeShape)
     }
@@ -47,18 +52,32 @@ class GraphGraphics(
         graphics.drawString(title, (pos.x * xPadding).toFloat(), (pos.y * yPadding - nodeRadius).toFloat())
     }
 
-    private fun nodeShape(x: Double, y: Double) = Ellipse2D.Double(
-        x * xPadding - nodeRadius / 2,
-        y * yPadding - nodeRadius / 2,
+    private fun nodeShape(pos: Position) = Ellipse2D.Double(
+        pos.x * xPadding - nodeRadius / 2,
+        pos.y * yPadding - nodeRadius / 2,
         nodeRadius,
         nodeRadius
     )
 
-    private fun edgeShape(sourceX: Double, sourceY: Double, destX: Double, destY: Double) = Line2D.Double(
-        sourceX * xPadding,
-        sourceY * yPadding,
-        destX * xPadding,
-        destY * yPadding
+    private fun straightEdgeShape(source: Position, dest: Position) = Line2D.Double(
+        source.x * xPadding,
+        source.y * yPadding,
+        dest.x * xPadding,
+        dest.y * yPadding
+    )
+
+    private fun bezierEdgeShape(source: Position, dest: Position) = CubicCurve2D.Double(
+        source.x * xPadding,
+        source.y * yPadding,
+
+        source.x * xPadding,
+        source.y * yPadding + yPadding / 2,
+
+        dest.x * xPadding,
+        dest.y * yPadding - yPadding / 2,
+
+        dest.x * xPadding,
+        dest.y * yPadding
     )
 
     private fun prepareCanvas() {
@@ -81,7 +100,7 @@ class GraphGraphics(
     private fun drawGrid() {
         fun drawVerticalGridLine(x: Int) = graphics.drawLine(x, 0, x, image.height)
         fun drawHorizontalGridLine(y: Int) = graphics.drawLine(0, y, image.width, y)
-        graphics.color = Color.GRAY
+        graphics.color = Color.LIGHT_GRAY
         if (grid) {
             (0 .. image.width step xPadding.toInt()).forEach(::drawVerticalGridLine)
             (0 .. image.height step yPadding.toInt()).forEach(::drawHorizontalGridLine)
